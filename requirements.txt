@@ -1,0 +1,6 @@
+# Python 실습 (Colab 에는 numpy, matplotlib 이 이미 있다)
+numpy>=1.24
+matplotlib>=3.7
+mujoco>=3.1
+imageio>=2.31
+imageio-ffmpeg>=0.4

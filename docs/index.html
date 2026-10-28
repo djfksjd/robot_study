@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SCARA 웹 시뮬레이터</title>
+<link rel="icon" href="data:," />
+<meta name="description" content="robot_study: 설치 없이 브라우저에서 SCARA 로봇의 관절·역기구학·픽앤플레이스를 실습한다." />
+<style>
+  :root {
+    --bg: #f3f4f6; --panel: #ffffff; --ink: #1b1f24; --muted: #5b6472; --line: #d9dde3;
+    --accent: #2f6fdf; --stop: #d92d20; --ok: #1f8a4c; --warn: #b54708; --code: #f6f7f9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #121417; --panel: #1b1e23; --ink: #e8eaed; --muted: #9aa3af; --line: #30353d;
+      --accent: #6b9cff; --stop: #ff5a4e; --ok: #4cc27f; --warn: #f0a04b; --code: #23272e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #121417; --panel: #1b1e23; --ink: #e8eaed; --muted: #9aa3af; --line: #30353d;
+    --accent: #6b9cff; --stop: #ff5a4e; --ok: #4cc27f; --warn: #f0a04b; --code: #23272e;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+  .app { display: grid; grid-template-columns: minmax(0, 1fr) 380px; height: 100vh; }
+  #view { position: relative; min-height: 0; }
+  #view canvas { display: block; width: 100%; height: 100%; }
+  .hud { position: absolute; left: 12px; top: 12px; background: color-mix(in srgb, var(--panel) 88%, transparent); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font: 12px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; pointer-events: none; }
+  .state { position: absolute; right: 12px; top: 12px; padding: 4px 10px; border-radius: 999px; font-weight: 600; font-size: 12px; background: var(--panel); border: 1px solid var(--line); }
+  .state.run { color: var(--accent); } .state.stop { color: var(--stop); } .state.idle { color: var(--ok); }
+  #stop { position: absolute; right: 12px; bottom: 12px; width: 96px; height: 96px; border-radius: 50%; border: 6px solid #ffd60a; background: var(--stop); color: #fff; font-weight: 800; font-size: 20px; cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.25); }
+  #stop:active { transform: scale(.96); }
+  aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y: auto; padding: 14px 16px 40px; }
+  h1 { font-size: 17px; margin: 0 0 2px; } .sub { color: var(--muted); margin: 0 0 12px; font-size: 12px; }
+  details { border-top: 1px solid var(--line); padding: 10px 0; }
+  summary { font-weight: 650; cursor: pointer; }
+  .row { display: grid; grid-template-columns: 64px 1fr 64px; gap: 8px; align-items: center; margin: 6px 0; }
+  .row label { font-size: 12px; color: var(--muted); }
+  .row output { font: 12px ui-monospace, Menlo, monospace; text-align: right; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .grid4 input { width: 100%; padding: 5px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--code); color: var(--ink); font: 12px ui-monospace, Menlo, monospace; }
+  .grid4 span { font-size: 11px; color: var(--muted); }
+  textarea { width: 100%; min-height: 200px; resize: vertical; border: 1px solid var(--line); border-radius: 8px; background: var(--code); color: var(--ink); font: 12px/1.45 ui-monospace, Menlo, monospace; padding: 8px; }
+  .btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  button.b { border: 1px solid var(--line); background: var(--code); color: var(--ink); border-radius: 7px; padding: 6px 10px; cursor: pointer; font: inherit; font-size: 13px; }
+  button.b.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.b:disabled { opacity: .5; cursor: not-allowed; }
+  #log { margin-top: 8px; max-height: 220px; overflow-y: auto; background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; font: 12px/1.5 ui-monospace, Menlo, monospace; white-space: pre-wrap; }
+  #log .err { color: var(--stop); } #log .ok { color: var(--ok); } #log .warn { color: var(--warn); }
+  .note { color: var(--muted); font-size: 12px; }
+  a { color: var(--accent); }
+  kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; font-size: 11px; }
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: 58vh auto; height: auto; }
+    aside { border-left: 0; border-top: 1px solid var(--line); padding: 12px 16px 40px; }
+    #stop { width: 76px; height: 76px; font-size: 16px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.179.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.179.1/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div class="app">
+  <div id="view">
+    <div class="hud" id="hud">로딩 중…</div>
+    <div class="state idle" id="state">IDLE</div>
+    <button id="stop" title="즉시 정지 (Space)">STOP</button>
+  </div>
+  <aside>
+    <h1>SCARA 웹 시뮬레이터</h1>
+    <p class="sub">robot_study · RS-450 (L1 250 / L2 200 mm) · 모델: sceliph GLB · <a href="https://github.com/djfksjd/robot_study">GitHub</a></p>
+
+    <details open>
+      <summary>1. 관절 직접 움직이기 (정기구학)</summary>
+      <div id="sliders"></div>
+      <p class="note">슬라이더를 움직이면 왼쪽 위 TCP 좌표가 FK로 계산된다.</p>
+    </details>
+
+    <details open>
+      <summary>2. 좌표로 이동 (역기구학)</summary>
+      <div class="grid4">
+        <span>x mm</span><span>y mm</span><span>z mm</span><span>yaw °</span>
+        <input id="ikx" type="number" value="300" /><input id="iky" type="number" value="150" />
+        <input id="ikz" type="number" value="90" /><input id="ikyaw" type="number" value="0" />
+      </div>
+      <div class="btns">
+        <button class="b primary" id="ikgo">이동</button>
+        <button class="b" id="home">홈</button>
+        <button class="b" id="ws">작업영역 표시</button>
+      </div>
+    </details>
+
+    <details open>
+      <summary>3. 작업 계획(JSON) 실행</summary>
+      <p class="note">AI 챗이 만든 JSON을 붙여넣고 <b>검사</b> → <b>실행</b>. 허용 행동만 통과한다. 실행 중 <kbd>Space</kbd> 또는 STOP 버튼으로 즉시 정지.</p>
+      <textarea id="plan" spellcheck="false"></textarea>
+      <div class="row"><label>속도</label><input id="speed" type="range" min="0.2" max="2" step="0.1" value="1" /><output id="speedv">1.0×</output></div>
+      <div class="btns">
+        <button class="b" id="validate">검사</button>
+        <button class="b primary" id="run">실행</button>
+        <button class="b" id="reset">장면 초기화</button>
+        <button class="b" id="example">예제 넣기</button>
+        <button class="b" id="copyprompt">AI 프롬프트 복사</button>
+      </div>
+      <div id="log"></div>
+    </details>
+
+    <details>
+      <summary>도움말</summary>
+      <p class="note">좌표계: 로봇 Z-up, X 앞(+), Y 왼쪽(+), 원점은 베이스 바닥 중심. 블록 30 mm, 물체 이름 <code>red / green / blue</code>, 목표 <code>tray_A / tray_B</code>.</p>
+      <p class="note">허용 행동: <code>home, move_to{x,y,z,yaw_deg}, open_gripper, close_gripper, pick{object}, place{target}, wait{seconds}, stop</code></p>
+      <p class="note">이 시뮬레이터는 운동학 시뮬레이션이다(파지는 조건 충족 시 붙이는 방식). 물리 접촉은 MuJoCo 실습(Lab 6)에서 다룬다.</p>
+      <p class="note"><a href="models/scara_rigged.glb" download>scara_rigged.glb 다운로드</a></p>
+    </details>
+  </aside>
+</div>
+<script type="module" src="sim.js"></script>
+</body>
+</html>

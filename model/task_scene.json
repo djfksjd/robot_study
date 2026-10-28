@@ -1,0 +1,18 @@
+{
+  "schema": "robot_study.task-scene/0.1",
+  "units": "mm (로봇 좌표, Z-up)",
+  "block_size": 30,
+  "z_safe": 90,
+  "grip_closed_mm": 20,
+  "grip_open_mm": 50,
+  "objects": {
+    "red":   { "x": 330, "y": 120,  "color": "#d93636" },
+    "green": { "x": 330, "y": 0,    "color": "#34b35a" },
+    "blue":  { "x": 330, "y": -120, "color": "#3366e6" }
+  },
+  "targets": {
+    "tray_A": { "x": 60, "y": 330 },
+    "tray_B": { "x": 60, "y": -330 }
+  },
+  "allowed_actions": ["home", "move_to", "open_gripper", "close_gripper", "pick", "place", "wait", "stop"]
+}

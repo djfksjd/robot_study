@@ -1,0 +1,14 @@
+{
+  "name": "robot-study-tools",
+  "private": true,
+  "type": "module",
+  "description": "SCARA GLB 리깅·검사 도구",
+  "scripts": {
+    "rig": "node rig_scara_glb.mjs ../models/scara/scara_sceliph_flat.glb ../models/scara/scara_rigged.glb",
+    "inspect": "node inspect_glb.mjs ../models/scara/scara_rigged.glb"
+  },
+  "dependencies": {
+    "@gltf-transform/core": "4.2.1",
+    "@gltf-transform/extensions": "4.2.1"
+  }
+}

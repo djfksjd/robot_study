@@ -1,0 +1,1698 @@
+{
+ "schema": "morphloom.assembly/0.1",
+ "name": "RS-450 학습용 SCARA",
+ "units": "mm",
+ "metadata": {
+  "source": "robot_study/model/build_scara_ir.py",
+  "params": "robot_study/model/scara_params.json",
+  "evidence": "창작 학습용 형상. 실측·특정 제품 복제가 아니며 내부 구조는 inferred.",
+  "pose": "home: theta1=theta2=theta4=0, d3=0, gripper gap 50 mm"
+ },
+ "components": [
+  {
+   "id": "base__plate",
+   "name": "베이스 플레이트",
+   "category": "mechanical",
+   "materialName": "주물 알루미늄",
+   "detail": "바닥 고정판 320x320x24 mm, 4볼트 고정",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     320,
+     24,
+     320
+    ],
+    "radius": 8,
+    "segments": 4
+   },
+   "position": [
+    0,
+    12,
+    0
+   ],
+   "material": {
+    "color": "#2b2f35",
+    "surface": "bead-blasted-metal",
+    "roughness": 0.7,
+    "metalness": 0.6
+   }
+  },
+  {
+   "id": "base__column",
+   "name": "베이스 기둥",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "J1 모터·감속기를 담는 원기둥 (inferred 내부 구조)",
+   "geometry": {
+    "op": "lathe",
+    "profile": [
+     [
+      0,
+      200
+     ],
+     [
+      76,
+      200
+     ],
+     [
+      74,
+      196
+     ],
+     [
+      80,
+      40
+     ],
+     [
+      84,
+      24
+     ],
+     [
+      0,
+      24
+     ]
+    ],
+    "segments": 72
+   },
+   "position": [
+    0,
+    0,
+    0
+   ],
+   "material": {
+    "color": "#eef0f2",
+    "surface": "coated-metal",
+    "roughness": 0.42,
+    "metalness": 0.05,
+    "clearcoat": 0.3,
+    "clearcoatRoughness": 0.35
+   }
+  },
+  {
+   "id": "base__j1_housing",
+   "name": "J1 하우징",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "J1 회전부 링",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 92,
+    "radiusBottom": 92,
+    "depth": 50,
+    "radialSegments": 72
+   },
+   "position": [
+    0,
+    225,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "base__connector_box",
+   "name": "커넥터 박스",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "뒤쪽 케이블 인입부",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     80,
+     120,
+     110
+    ],
+    "radius": 10,
+    "segments": 4
+   },
+   "position": [
+    -120,
+    84,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "base__connector_a",
+   "name": "전원 커넥터",
+   "category": "mechanical",
+   "materialName": "니켈 도금",
+   "detail": "원형 커넥터(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 12,
+    "radiusBottom": 12,
+    "depth": 14,
+    "radialSegments": 32
+   },
+   "position": [
+    -167,
+    100,
+    -22
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   },
+   "rotation": [
+    0,
+    0,
+    1.5707963267948966
+   ]
+  },
+  {
+   "id": "base__connector_b",
+   "name": "신호 커넥터",
+   "category": "mechanical",
+   "materialName": "니켈 도금",
+   "detail": "원형 커넥터(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 9,
+    "radiusBottom": 9,
+    "depth": 14,
+    "radialSegments": 32
+   },
+   "position": [
+    -167,
+    100,
+    24
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   },
+   "rotation": [
+    0,
+    0,
+    1.5707963267948966
+   ]
+  },
+  {
+   "id": "base__status_led",
+   "name": "상태 LED",
+   "category": "mechanical",
+   "materialName": "폴리카보네이트",
+   "detail": "전원 표시등(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 6,
+    "radiusBottom": 6,
+    "depth": 4,
+    "radialSegments": 24
+   },
+   "position": [
+    -167,
+    60,
+    0
+   ],
+   "material": {
+    "color": "#3ccf6e",
+    "surface": "molded-polymer",
+    "roughness": 0.3,
+    "metalness": 0.0
+   },
+   "rotation": [
+    0,
+    0,
+    1.5707963267948966
+   ]
+  },
+  {
+   "id": "base__bolt_0",
+   "name": "고정 볼트 0",
+   "category": "mechanical",
+   "materialName": "스테인리스",
+   "detail": "M10 육각 소켓 볼트 머리(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 8,
+    "radiusBottom": 8,
+    "depth": 6,
+    "radialSegments": 6
+   },
+   "position": [
+    130,
+    27,
+    -130
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   }
+  },
+  {
+   "id": "base__bolt_1",
+   "name": "고정 볼트 1",
+   "category": "mechanical",
+   "materialName": "스테인리스",
+   "detail": "M10 육각 소켓 볼트 머리(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 8,
+    "radiusBottom": 8,
+    "depth": 6,
+    "radialSegments": 6
+   },
+   "position": [
+    -130,
+    27,
+    -130
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   }
+  },
+  {
+   "id": "base__bolt_2",
+   "name": "고정 볼트 2",
+   "category": "mechanical",
+   "materialName": "스테인리스",
+   "detail": "M10 육각 소켓 볼트 머리(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 8,
+    "radiusBottom": 8,
+    "depth": 6,
+    "radialSegments": 6
+   },
+   "position": [
+    130,
+    27,
+    130
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   }
+  },
+  {
+   "id": "base__bolt_3",
+   "name": "고정 볼트 3",
+   "category": "mechanical",
+   "materialName": "스테인리스",
+   "detail": "M10 육각 소켓 볼트 머리(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 8,
+    "radiusBottom": 8,
+    "depth": 6,
+    "radialSegments": 6
+   },
+   "position": [
+    -130,
+    27,
+    130
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   }
+  },
+  {
+   "id": "link1__body",
+   "name": "제1 링크",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄 주물",
+   "detail": "J1-J2 중심거리 L1=250 mm, 두께 56 mm",
+   "geometry": {
+    "op": "extrude",
+    "points": [
+     [
+      252.4,
+      -59.952
+     ],
+     [
+      260.0076,
+      -59.1595
+     ],
+     [
+      267.4525,
+      -57.4057
+     ],
+     [
+      274.6138,
+      -54.7189
+     ],
+     [
+      281.3752,
+      -51.1429
+     ],
+     [
+      287.6266,
+      -46.7358
+     ],
+     [
+      293.2666,
+      -41.5692
+     ],
+     [
+      298.2035,
+      -35.7271
+     ],
+     [
+      302.357,
+      -29.3043
+     ],
+     [
+      305.6597,
+      -22.4054
+     ],
+     [
+      308.0578,
+      -15.1423
+     ],
+     [
+      309.5125,
+      -7.6332
+     ],
+     [
+      310.0,
+      0.0
+     ],
+     [
+      309.5125,
+      7.6332
+     ],
+     [
+      308.0578,
+      15.1423
+     ],
+     [
+      305.6597,
+      22.4054
+     ],
+     [
+      302.357,
+      29.3043
+     ],
+     [
+      298.2035,
+      35.7271
+     ],
+     [
+      293.2666,
+      41.5692
+     ],
+     [
+      287.6266,
+      46.7358
+     ],
+     [
+      281.3752,
+      51.1429
+     ],
+     [
+      274.6138,
+      54.7189
+     ],
+     [
+      267.4525,
+      57.4057
+     ],
+     [
+      260.0076,
+      59.1595
+     ],
+     [
+      252.4,
+      59.952
+     ],
+     [
+      2.8,
+      69.944
+     ],
+     [
+      -6.5859,
+      69.6895
+     ],
+     [
+      -15.8533,
+      68.1812
+     ],
+     [
+      -24.8354,
+      65.4462
+     ],
+     [
+      -33.3707,
+      61.5337
+     ],
+     [
+      -41.3057,
+      56.5141
+     ],
+     [
+      -48.4974,
+      50.4777
+     ],
+     [
+      -54.8166,
+      43.5332
+     ],
+     [
+      -60.1496,
+      35.8054
+     ],
+     [
+      -64.4004,
+      27.4334
+     ],
+     [
+      -67.4925,
+      18.5678
+     ],
+     [
+      -69.3703,
+      9.3682
+     ],
+     [
+      -70.0,
+      0.0
+     ],
+     [
+      -69.3703,
+      -9.3682
+     ],
+     [
+      -67.4925,
+      -18.5678
+     ],
+     [
+      -64.4004,
+      -27.4334
+     ],
+     [
+      -60.1496,
+      -35.8054
+     ],
+     [
+      -54.8166,
+      -43.5332
+     ],
+     [
+      -48.4974,
+      -50.4777
+     ],
+     [
+      -41.3057,
+      -56.5141
+     ],
+     [
+      -33.3707,
+      -61.5337
+     ],
+     [
+      -24.8354,
+      -65.4462
+     ],
+     [
+      -15.8533,
+      -68.1812
+     ],
+     [
+      -6.5859,
+      -69.6895
+     ],
+     [
+      2.8,
+      -69.944
+     ]
+    ],
+    "depth": 56,
+    "bevelSize": 3,
+    "bevelThickness": 3,
+    "bevelSegments": 2
+   },
+   "position": [
+    0,
+    280,
+    0
+   ],
+   "material": {
+    "color": "#eef0f2",
+    "surface": "coated-metal",
+    "roughness": 0.42,
+    "metalness": 0.05,
+    "clearcoat": 0.3,
+    "clearcoatRoughness": 0.35
+   },
+   "rotation": [
+    -1.5707963267948966,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "link1__band",
+   "name": "제1 링크 측면 띠",
+   "category": "mechanical",
+   "materialName": "폴리머",
+   "detail": "식별용 색 띠",
+   "geometry": {
+    "op": "extrude",
+    "points": [
+     [
+      252.6,
+      -64.948
+     ],
+     [
+      260.8415,
+      -64.0895
+     ],
+     [
+      268.9069,
+      -62.1895
+     ],
+     [
+      276.665,
+      -59.2788
+     ],
+     [
+      283.9898,
+      -55.4048
+     ],
+     [
+      290.7622,
+      -50.6305
+     ],
+     [
+      296.8722,
+      -45.0333
+     ],
+     [
+      302.2204,
+      -38.7043
+     ],
+     [
+      306.7201,
+      -31.7464
+     ],
+     [
+      310.298,
+      -24.2725
+     ],
+     [
+      312.896,
+      -16.4042
+     ],
+     [
+      314.4718,
+      -8.2693
+     ],
+     [
+      315.0,
+      0.0
+     ],
+     [
+      314.4718,
+      8.2693
+     ],
+     [
+      312.896,
+      16.4042
+     ],
+     [
+      310.298,
+      24.2725
+     ],
+     [
+      306.7201,
+      31.7464
+     ],
+     [
+      302.2204,
+      38.7043
+     ],
+     [
+      296.8722,
+      45.0333
+     ],
+     [
+      290.7622,
+      50.6305
+     ],
+     [
+      283.9898,
+      55.4048
+     ],
+     [
+      276.665,
+      59.2788
+     ],
+     [
+      268.9069,
+      62.1895
+     ],
+     [
+      260.8415,
+      64.0895
+     ],
+     [
+      252.6,
+      64.948
+     ],
+     [
+      3.0,
+      74.94
+     ],
+     [
+      -7.0563,
+      74.6673
+     ],
+     [
+      -16.9856,
+      73.0513
+     ],
+     [
+      -26.6094,
+      70.1209
+     ],
+     [
+      -35.7544,
+      65.9289
+     ],
+     [
+      -44.2561,
+      60.5508
+     ],
+     [
+      -51.9615,
+      54.0833
+     ],
+     [
+      -58.7321,
+      46.6427
+     ],
+     [
+      -64.446,
+      38.3629
+     ],
+     [
+      -69.0004,
+      29.3929
+     ],
+     [
+      -72.3134,
+      19.8941
+     ],
+     [
+      -74.3253,
+      10.0373
+     ],
+     [
+      -75.0,
+      0.0
+     ],
+     [
+      -74.3253,
+      -10.0373
+     ],
+     [
+      -72.3134,
+      -19.8941
+     ],
+     [
+      -69.0004,
+      -29.3929
+     ],
+     [
+      -64.446,
+      -38.3629
+     ],
+     [
+      -58.7321,
+      -46.6427
+     ],
+     [
+      -51.9615,
+      -54.0833
+     ],
+     [
+      -44.2561,
+      -60.5508
+     ],
+     [
+      -35.7544,
+      -65.9289
+     ],
+     [
+      -26.6094,
+      -70.1209
+     ],
+     [
+      -16.9856,
+      -73.0513
+     ],
+     [
+      -7.0563,
+      -74.6673
+     ],
+     [
+      3.0,
+      -74.94
+     ]
+    ],
+    "depth": 14
+   },
+   "position": [
+    0,
+    280,
+    0
+   ],
+   "material": {
+    "color": "#2f6fdf",
+    "surface": "molded-polymer",
+    "roughness": 0.4,
+    "metalness": 0.0
+   },
+   "rotation": [
+    -1.5707963267948966,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "link1__j2_ring",
+   "name": "J2 베어링 링",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "J2 회전 경계",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 56,
+    "radiusBottom": 56,
+    "depth": 10,
+    "radialSegments": 64
+   },
+   "position": [
+    250,
+    313,
+    0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "link1__j1_cap",
+   "name": "J1 캡",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "J1 축 상단 캡",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 40,
+    "radiusBottom": 40,
+    "depth": 6,
+    "radialSegments": 48
+   },
+   "position": [
+    0,
+    311,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "link2__body",
+   "name": "제2 링크",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄 주물",
+   "detail": "J2-J3 중심거리 L2=200 mm, 두께 56 mm",
+   "geometry": {
+    "op": "extrude",
+    "points": [
+     [
+      452.6,
+      -51.935
+     ],
+     [
+      459.1433,
+      -51.1898
+     ],
+     [
+      465.54,
+      -49.6237
+     ],
+     [
+      471.6874,
+      -47.2616
+     ],
+     [
+      477.487,
+      -44.1414
+     ],
+     [
+      482.8457,
+      -40.3133
+     ],
+     [
+      487.6776,
+      -35.8385
+     ],
+     [
+      491.9051,
+      -30.789
+     ],
+     [
+      495.4606,
+      -25.2456
+     ],
+     [
+      498.2868,
+      -19.2972
+     ],
+     [
+      500.3386,
+      -13.0394
+     ],
+     [
+      501.583,
+      -6.5724
+     ],
+     [
+      502.0,
+      0.0
+     ],
+     [
+      501.583,
+      6.5724
+     ],
+     [
+      500.3386,
+      13.0394
+     ],
+     [
+      498.2868,
+      19.2972
+     ],
+     [
+      495.4606,
+      25.2456
+     ],
+     [
+      491.9051,
+      30.789
+     ],
+     [
+      487.6776,
+      35.8385
+     ],
+     [
+      482.8457,
+      40.3133
+     ],
+     [
+      477.487,
+      44.1414
+     ],
+     [
+      471.6874,
+      47.2616
+     ],
+     [
+      465.54,
+      49.6237
+     ],
+     [
+      459.1433,
+      51.1898
+     ],
+     [
+      452.6,
+      51.935
+     ],
+     [
+      253.1,
+      61.9225
+     ],
+     [
+      244.7334,
+      61.7759
+     ],
+     [
+      236.4628,
+      60.5041
+     ],
+     [
+      228.4387,
+      58.1301
+     ],
+     [
+      220.8074,
+      54.6973
+     ],
+     [
+      213.7079,
+      50.2681
+     ],
+     [
+      207.2694,
+      44.9233
+     ],
+     [
+      201.6094,
+      38.7601
+     ],
+     [
+      196.8307,
+      31.8909
+     ],
+     [
+      193.0206,
+      24.4408
+     ],
+     [
+      190.2485,
+      16.5455
+     ],
+     [
+      188.5647,
+      8.3488
+     ],
+     [
+      188.0,
+      0.0
+     ],
+     [
+      188.5647,
+      -8.3488
+     ],
+     [
+      190.2485,
+      -16.5455
+     ],
+     [
+      193.0206,
+      -24.4408
+     ],
+     [
+      196.8307,
+      -31.8909
+     ],
+     [
+      201.6094,
+      -38.7601
+     ],
+     [
+      207.2694,
+      -44.9233
+     ],
+     [
+      213.7079,
+      -50.2681
+     ],
+     [
+      220.8074,
+      -54.6973
+     ],
+     [
+      228.4387,
+      -58.1301
+     ],
+     [
+      236.4628,
+      -60.5041
+     ],
+     [
+      244.7334,
+      -61.7759
+     ],
+     [
+      253.1,
+      -61.9225
+     ]
+    ],
+    "depth": 56,
+    "bevelSize": 3,
+    "bevelThickness": 3,
+    "bevelSegments": 2
+   },
+   "position": [
+    0,
+    346,
+    0
+   ],
+   "material": {
+    "color": "#eef0f2",
+    "surface": "coated-metal",
+    "roughness": 0.42,
+    "metalness": 0.05,
+    "clearcoat": 0.3,
+    "clearcoatRoughness": 0.35
+   },
+   "rotation": [
+    -1.5707963267948966,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "link2__band",
+   "name": "제2 링크 측면 띠",
+   "category": "mechanical",
+   "materialName": "폴리머",
+   "detail": "식별용 색 띠",
+   "geometry": {
+    "op": "extrude",
+    "points": [
+     [
+      452.85,
+      -56.9287
+     ],
+     [
+      460.0225,
+      -56.1119
+     ],
+     [
+      467.0342,
+      -54.3952
+     ],
+     [
+      473.7728,
+      -51.8059
+     ],
+     [
+      480.13,
+      -48.3858
+     ],
+     [
+      486.0039,
+      -44.1895
+     ],
+     [
+      491.3004,
+      -39.2845
+     ],
+     [
+      495.9345,
+      -33.7494
+     ],
+     [
+      499.8318,
+      -27.673
+     ],
+     [
+      502.9298,
+      -21.1527
+     ],
+     [
+      505.1788,
+      -14.2932
+     ],
+     [
+      506.5429,
+      -7.2044
+     ],
+     [
+      507.0,
+      0.0
+     ],
+     [
+      506.5429,
+      7.2044
+     ],
+     [
+      505.1788,
+      14.2932
+     ],
+     [
+      502.9298,
+      21.1527
+     ],
+     [
+      499.8318,
+      27.673
+     ],
+     [
+      495.9345,
+      33.7494
+     ],
+     [
+      491.3004,
+      39.2845
+     ],
+     [
+      486.0039,
+      44.1895
+     ],
+     [
+      480.13,
+      48.3858
+     ],
+     [
+      473.7728,
+      51.8059
+     ],
+     [
+      467.0342,
+      54.3952
+     ],
+     [
+      460.0225,
+      56.1119
+     ],
+     [
+      452.85,
+      56.9287
+     ],
+     [
+      253.35,
+      66.9162
+     ],
+     [
+      244.3087,
+      66.7578
+     ],
+     [
+      235.3711,
+      65.3834
+     ],
+     [
+      226.6999,
+      62.818
+     ],
+     [
+      218.4532,
+      59.1084
+     ],
+     [
+      210.7811,
+      54.322
+     ],
+     [
+      203.8234,
+      48.5461
+     ],
+     [
+      197.7069,
+      41.8859
+     ],
+     [
+      192.5429,
+      34.4628
+     ],
+     [
+      188.4255,
+      26.4118
+     ],
+     [
+      185.4298,
+      17.8798
+     ],
+     [
+      183.6102,
+      9.0221
+     ],
+     [
+      183.0,
+      0.0
+     ],
+     [
+      183.6102,
+      -9.0221
+     ],
+     [
+      185.4298,
+      -17.8798
+     ],
+     [
+      188.4255,
+      -26.4118
+     ],
+     [
+      192.5429,
+      -34.4628
+     ],
+     [
+      197.7069,
+      -41.8859
+     ],
+     [
+      203.8234,
+      -48.5461
+     ],
+     [
+      210.7811,
+      -54.322
+     ],
+     [
+      218.4532,
+      -59.1084
+     ],
+     [
+      226.6999,
+      -62.818
+     ],
+     [
+      235.3711,
+      -65.3834
+     ],
+     [
+      244.3087,
+      -66.7578
+     ],
+     [
+      253.35,
+      -66.9162
+     ]
+    ],
+    "depth": 14
+   },
+   "position": [
+    0,
+    346,
+    0
+   ],
+   "material": {
+    "color": "#f28c28",
+    "surface": "molded-polymer",
+    "roughness": 0.45,
+    "metalness": 0.0
+   },
+   "rotation": [
+    -1.5707963267948966,
+    0,
+    0
+   ]
+  },
+  {
+   "id": "link2__j2_cover",
+   "name": "J2 모터 커버",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "J2 모터 상단 커버",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 50,
+    "radiusBottom": 50,
+    "depth": 40,
+    "radialSegments": 64
+   },
+   "position": [
+    250,
+    394,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "link2__head",
+   "name": "J3/J4 모터 헤드",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "Z축·회전축 모터를 덮는 헤드 커버 (inferred 내부)",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     130,
+     70,
+     104
+    ],
+    "radius": 14,
+    "segments": 4
+   },
+   "position": [
+    430,
+    409,
+    0
+   ],
+   "material": {
+    "color": "#eef0f2",
+    "surface": "coated-metal",
+    "roughness": 0.42,
+    "metalness": 0.05,
+    "clearcoat": 0.3,
+    "clearcoatRoughness": 0.35
+   }
+  },
+  {
+   "id": "link2__head_cap",
+   "name": "헤드 상판",
+   "category": "mechanical",
+   "materialName": "도장 알루미늄",
+   "detail": "헤드 상단 판",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     110,
+     6,
+     86
+    ],
+    "radius": 2,
+    "segments": 4
+   },
+   "position": [
+    430,
+    447,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "link2__spline_housing",
+   "name": "스플라인 너트 하우징",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "볼스크루 스플라인 너트 하우징",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 30,
+    "radiusBottom": 30,
+    "depth": 34,
+    "radialSegments": 48
+   },
+   "position": [
+    450,
+    305,
+    0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "link2__led",
+   "name": "동작 LED",
+   "category": "mechanical",
+   "materialName": "폴리카보네이트",
+   "detail": "동작 표시등(시각용)",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 5,
+    "radiusBottom": 5,
+    "depth": 4,
+    "radialSegments": 24
+   },
+   "position": [
+    365,
+    424,
+    0
+   ],
+   "material": {
+    "color": "#3ccf6e",
+    "surface": "molded-polymer",
+    "roughness": 0.3,
+    "metalness": 0.0
+   },
+   "rotation": [
+    0,
+    0,
+    1.5707963267948966
+   ]
+  },
+  {
+   "id": "quill__shaft",
+   "name": "볼스크루 스플라인 축",
+   "category": "mechanical",
+   "materialName": "경질 크롬 도금강",
+   "detail": "지름 20 mm, 길이 340 mm, Z 스트로크 180 mm",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 10,
+    "radiusBottom": 10,
+    "depth": 340,
+    "radialSegments": 48
+   },
+   "position": [
+    450,
+    370,
+    0
+   ],
+   "material": {
+    "color": "#d9dde2",
+    "surface": "polished-metal",
+    "roughness": 0.12,
+    "metalness": 1.0,
+    "anisotropy": 0.5
+   }
+  },
+  {
+   "id": "quill__stopper",
+   "name": "상단 스토퍼",
+   "category": "mechanical",
+   "materialName": "강",
+   "detail": "축 상단 기계식 스토퍼",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 16,
+    "radiusBottom": 16,
+    "depth": 12,
+    "radialSegments": 48
+   },
+   "position": [
+    450,
+    534,
+    0
+   ],
+   "material": {
+    "color": "#3a3f46",
+    "surface": "coated-metal",
+    "roughness": 0.55,
+    "metalness": 0.2
+   }
+  },
+  {
+   "id": "quill__flange",
+   "name": "툴 플랜지",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "엔드이펙터 장착 플랜지",
+   "geometry": {
+    "op": "cylinder",
+    "radiusTop": 30,
+    "radiusBottom": 30,
+    "depth": 10,
+    "radialSegments": 48
+   },
+   "position": [
+    450,
+    195,
+    0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "quill__gripper_body",
+   "name": "그리퍼 본체",
+   "category": "mechanical",
+   "materialName": "폴리머",
+   "detail": "평행 2지 그리퍼 본체 96x44x34 mm",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     96,
+     34,
+     44
+    ],
+    "radius": 4,
+    "segments": 4
+   },
+   "position": [
+    450,
+    173,
+    0
+   ],
+   "material": {
+    "color": "#f28c28",
+    "surface": "molded-polymer",
+    "roughness": 0.45,
+    "metalness": 0.0
+   }
+  },
+  {
+   "id": "quill__gripper_rail",
+   "name": "그리퍼 레일",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "손가락 직선 가이드",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     104,
+     6,
+     16
+    ],
+    "radius": 1.5,
+    "segments": 4
+   },
+   "position": [
+    450,
+    153,
+    0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "fingerL__finger",
+   "name": "왼쪽 손가락",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "손가락 24x10x50 mm",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     24,
+     50,
+     10
+    ],
+    "radius": 2,
+    "segments": 4
+   },
+   "position": [
+    450,
+    131,
+    -30.0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "fingerL__pad",
+   "name": "왼쪽 패드",
+   "category": "mechanical",
+   "materialName": "우레탄 고무",
+   "detail": "마찰 패드 20x3x30 mm, 아래 끝이 손가락 끝과 일치",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     20,
+     30,
+     3
+    ],
+    "radius": 1,
+    "segments": 4
+   },
+   "position": [
+    450,
+    121,
+    -26.5
+   ],
+   "material": {
+    "color": "#15171a",
+    "surface": "rubber",
+    "roughness": 0.9,
+    "metalness": 0.0
+   }
+  },
+  {
+   "id": "fingerR__finger",
+   "name": "오른쪽 손가락",
+   "category": "mechanical",
+   "materialName": "양극산화 알루미늄",
+   "detail": "손가락 24x10x50 mm",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     24,
+     50,
+     10
+    ],
+    "radius": 2,
+    "segments": 4
+   },
+   "position": [
+    450,
+    131,
+    30.0
+   ],
+   "material": {
+    "color": "#1f2227",
+    "surface": "anodized-metal",
+    "roughness": 0.35,
+    "metalness": 0.85
+   }
+  },
+  {
+   "id": "fingerR__pad",
+   "name": "오른쪽 패드",
+   "category": "mechanical",
+   "materialName": "우레탄 고무",
+   "detail": "마찰 패드 20x3x30 mm, 아래 끝이 손가락 끝과 일치",
+   "geometry": {
+    "op": "roundedBox",
+    "size": [
+     20,
+     30,
+     3
+    ],
+    "radius": 1,
+    "segments": 4
+   },
+   "position": [
+    450,
+    121,
+    26.5
+   ],
+   "material": {
+    "color": "#15171a",
+    "surface": "rubber",
+    "roughness": 0.9,
+    "metalness": 0.0
+   }
+  }
+ ]
+}

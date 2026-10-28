@@ -1,0 +1,31 @@
+{
+  "schema": "robot_study.scara-params/0.1",
+  "name": "RS-450 학습용 SCARA",
+  "units": "mm / deg",
+  "frame": "로봇 좌표계: Z-up, X 앞, Y 왼쪽. 원점은 베이스 바닥 중심(작업대 표면).",
+  "L1": 250,
+  "L2": 200,
+  "j1_height": 250,
+  "tcp_z_at_d0": 121,
+  "limits": {
+    "theta1_deg": [-132, 132],
+    "theta2_deg": [-145, 145],
+    "d3_mm": [0, 180],
+    "theta4_deg": [-360, 360],
+    "gripper_gap_mm": [20, 70]
+  },
+  "max_speed": {
+    "theta1_dps": 180,
+    "theta2_dps": 240,
+    "d3_mmps": 300,
+    "theta4_dps": 360,
+    "gripper_mmps": 60
+  },
+  "gripper_gap_home_mm": 50,
+  "notes": [
+    "theta1, theta2, theta4: 위에서 내려다볼 때 반시계(+Z 축) 방향이 +.",
+    "d3: 퀼(볼스크루 스플라인 축)이 아래로 내려간 거리. 0이 가장 높음.",
+    "TCP: 두 손가락 패드 중심. z_tcp = tcp_z_at_d0 - d3.",
+    "이 파일이 단일 기준값이다. IR 생성기, Python 기구학, MuJoCo, 웹 시뮬레이터가 같은 값을 쓴다."
+  ]
+}
