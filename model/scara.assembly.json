@@ -1531,13 +1531,13 @@
    "name": "그리퍼 본체",
    "category": "mechanical",
    "materialName": "폴리머",
-   "detail": "평행 2지 그리퍼 본체 96x44x34 mm",
+   "detail": "평행 2지 그리퍼 본체 44x96x34 mm (손가락이 벌어지는 y 방향이 길다)",
    "geometry": {
     "op": "roundedBox",
     "size": [
-     96,
+     44,
      34,
-     44
+     96
     ],
     "radius": 4,
     "segments": 4
@@ -1559,13 +1559,13 @@
    "name": "그리퍼 레일",
    "category": "mechanical",
    "materialName": "양극산화 알루미늄",
-   "detail": "손가락 직선 가이드",
+   "detail": "손가락 직선 가이드 (y 방향)",
    "geometry": {
     "op": "roundedBox",
     "size": [
-     104,
+     16,
      6,
-     16
+     104
     ],
     "radius": 1.5,
     "segments": 4

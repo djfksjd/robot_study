@@ -71,10 +71,13 @@ for loc, energy, size in [((1.2, -1.0, 1.6), 260, 1.5), ((-1.0, 1.2, 1.2), 90, 2
     light.rotation_euler = (Vector((0.15, 0, 0.25)) - Vector(loc)).to_track_quat("-Z", "Y").to_euler()
 
 target = Vector((0.17, 0, 0.24))
-cams = {"iso": (1.05, -0.95, 0.72), "front": (0.2, -1.4, 0.3), "top": (0.17, 0.0, 1.5)}
+cams = {"iso": (1.05, -0.95, 0.72), "front": (0.2, -1.4, 0.3), "top": (0.17, 0.0, 1.5), "gripper": (0.78, -0.22, 0.2)}
 bpy.ops.object.camera_add(location=cams[a.view])
 cam = bpy.context.object
 cam.data.lens = 45
+if a.view == "gripper":
+    target = Vector((0.45, 0, 0.15))
+    cam.data.lens = 60
 cam.rotation_euler = (target - cam.location).to_track_quat("-Z", "Y").to_euler()
 if a.view == "top":
     cam.rotation_euler = (0, 0, 0)

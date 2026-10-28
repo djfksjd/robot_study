@@ -136,8 +136,8 @@ components += [
          cyl(10, 340, 48), ir_pos(L1 + L2, 0, 200 + 170), CHROME),
     comp("quill__stopper", "상단 스토퍼", "강", "축 상단 기계식 스토퍼", cyl(16, 12, 48), ir_pos(L1 + L2, 0, 534), DARK),
     comp("quill__flange", "툴 플랜지", "양극산화 알루미늄", "엔드이펙터 장착 플랜지", cyl(30, 10, 48), ir_pos(L1 + L2, 0, 195), ANOD),
-    comp("quill__gripper_body", "그리퍼 본체", "폴리머", "평행 2지 그리퍼 본체 96x44x34 mm", box(96, 44, 34, 4), ir_pos(L1 + L2, 0, 173), ORANGE),
-    comp("quill__gripper_rail", "그리퍼 레일", "양극산화 알루미늄", "손가락 직선 가이드", box(104, 16, 6, 1.5), ir_pos(L1 + L2, 0, 153), ANOD),
+    comp("quill__gripper_body", "그리퍼 본체", "폴리머", "평행 2지 그리퍼 본체 44x96x34 mm (손가락이 벌어지는 y 방향이 길다)", box(44, 96, 34, 4), ir_pos(L1 + L2, 0, 173), ORANGE),
+    comp("quill__gripper_rail", "그리퍼 레일", "양극산화 알루미늄", "손가락 직선 가이드 (y 방향)", box(16, 104, 6, 1.5), ir_pos(L1 + L2, 0, 153), ANOD),
 ]
 
 # ---------------------------------------------------------------- fingers (그리퍼 직동)
