@@ -8,9 +8,12 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const $ = (id) => document.getElementById(id);
 const DEG = Math.PI / 180;
+// index.html 의 sim.js?v=… 를 모든 자산 주소에 붙여, 모델을 다시 만들면 브라우저 캐시를 건너뛴다
+const V = new URL(import.meta.url).searchParams.get('v') ?? 'dev';
+const asset = (path) => `${path}?v=${V}`;
 const [P, SCENE] = await Promise.all([
-  fetch('scara_params.json').then((r) => r.json()),
-  fetch('task_scene.json').then((r) => r.json()),
+  fetch(asset('scara_params.json')).then((r) => r.json()),
+  fetch(asset('task_scene.json')).then((r) => r.json()),
 ]);
 const { L1, L2 } = P;
 const LIM = P.limits;
@@ -141,7 +144,7 @@ workspace.visible = false;
 scene.add(workspace);
 
 // 로봇
-const gltf = await new GLTFLoader().loadAsync('models/scara_rigged.glb');
+const gltf = await new GLTFLoader().loadAsync(asset('models/scara_rigged.glb'));
 const robot = gltf.scene;
 robot.traverse((o) => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
 scene.add(robot);
